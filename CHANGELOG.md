@@ -9,17 +9,21 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-07
+
 ### Added
 
-- `scripts/validate.py` + `scripts/validate.sh` (graceful wrapper — warns and skips if Python is absent) + `.github/workflows/validate.yml` (pins Python, strict) — validation of manifests, dual-host parity, and frontmatter (adapted from `openehr/ai-plugins`).
-- `.claude/` — `settings.json` (enables maintainer plugins) and `CLAUDE.md` delegating to `AGENTS.md`.
-- `.github/` — issue templates (`proposal`, `skill-bug`) and `PULL_REQUEST_TEMPLATE.md`.
-- `docs/` — `install`, `testing`, `versioning`, and `skill-authoring` references.
+- Validation: `scripts/validate.py` (manifests, dual-host parity, frontmatter), `scripts/validate.sh` (graceful wrapper — warns and skips if Python is absent), and `.github/workflows/validate.yml` (pins Python, strict in CI). Adapted from `openehr/ai-plugins`.
+- `.claude/`: `settings.json` (enables maintainer plugins) and `CLAUDE.md` delegating to `AGENTS.md`.
+- `.github/`: issue templates (`proposal`, `skill-bug`) and `PULL_REQUEST_TEMPLATE.md`.
+- `docs/`: `install`, `testing`, `versioning`, and `skill-authoring` references.
 - `CODE_OF_CONDUCT.md` and `SECURITY.md` (content-integrity / supply-chain threat model and private reporting).
+- AGENTS.md: "Testing & validating this plugin", "Gotchas", and "Authoring skills & agents here" sections.
 
 ### Changed
 
-- Skills: tightened the four skill `description`s to the lean three-part triggering pattern (scope anchor + triggers + anti-trigger).
+- Skills: scoped all four `description`s to the maintainer/dev context and tightened them to the lean three-part triggering pattern (scope anchor + triggers + anti-trigger), ~50–75 words each.
+- Docs: reduced gratuitous "PHP MCP server" framing across `AGENTS.md`, `README.md`, and hooks (kept genuine PHP code/test/stack references).
 
 ## [0.1.0] - 2026-06-07
 
