@@ -1,0 +1,16 @@
+---
+name: dev-context
+description: When developing the openEHR Assistant MCP server or plugin, read the target repo's AGENTS.md first and use the dev plugin's authoring skills.
+alwaysApply: false
+globs: ["**/AGENTS.md", "**/composer.json", "**/.claude-plugin/plugin.json", "resources/guides/**", "resources/prompts/**", "src/Tools/**", "src/Prompts/**", "resources/examples/**"]
+---
+
+# openEHR Assistant dev context
+
+When working inside the **openehr-assistant-mcp** or **openehr-assistant-plugin** repos:
+
+1. **Read the target repo's `AGENTS.md` first** — it is authoritative for that repo. This plugin's skills operationalise those conventions, they do not replace them.
+2. **MCP repo is Docker-only**: never run `php`/`composer`/`vendor/bin/*` on the host. Use `make up-dev`, `make install`, and the `docker compose ... exec ... app composer …` commands.
+3. **Spec-aligned, no guessing**: when authoring guides/prompts/BMM/terminology, retrieve from `specifications.openehr.org` (llms.txt → `.md` twin → `type_specification_get` for class tables). Track the `development` branch.
+4. **Use the authoring skills**: `guide-prompt-authoring`, `mcp-tool-authoring`, `example-authoring` for new artefacts; `release-workflow` for versioning and changelog.
+5. **Keep both repos aligned**: when changing MCP tool names, guide URIs, or example kinds, update the user-facing plugin's `allowed-tools` and guide references accordingly.

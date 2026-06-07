@@ -1,0 +1,24 @@
+{
+  "name": "openehr-assistant-dev",
+  "displayName": "openEHR Assistant Dev",
+  "version": "0.1.0",
+  "description": "Maintainer plugin for developing the openEHR Assistant MCP server and plugin — authoring guides, prompts, MCP tools, examples, and managing releases",
+  "author": {
+    "name": "Cadasto B.V.",
+    "url": "https://github.com/cadasto"
+  },
+  "repository": "https://github.com/cadasto/openehr-assistant-dev-plugin",
+  "license": "MIT",
+  "keywords": [
+    "openehr",
+    "mcp",
+    "plugin-development",
+    "maintainer",
+    "tooling",
+    "authoring"
+  ],
+  "skills": "./skills/",
+  "rules": "./rules/",
+  "agents": "./agents/",
+  "hooks": "./hooks/cursor-hooks.json"
+}
