@@ -8,7 +8,7 @@ set -euo pipefail
 
 repo="unknown"
 
-# --- MCP server repo: PHP MCP server with attribute-driven discovery ---
+# --- MCP server repo: openehr-assistant-mcp with attribute-driven discovery ---
 if [ -f "composer.json" ] && grep -q "Cadasto\\\\OpenEHR\\\\MCP\\\\Assistant" composer.json 2>/dev/null; then
   repo="mcp"
 elif [ -f "public/index.php" ] && [ -d "src/Tools" ]; then
@@ -26,7 +26,7 @@ fi
 
 case "$repo" in
   mcp)
-    echo "openEHR Assistant Dev — target repo: openehr-assistant-mcp (PHP MCP server)"
+    echo "openEHR Assistant Dev — target repo: openehr-assistant-mcp (MCP server)"
     echo ""
     echo "Authoring skills: guide-prompt-authoring, mcp-tool-authoring, example-authoring"
     echo "Release: release-workflow"

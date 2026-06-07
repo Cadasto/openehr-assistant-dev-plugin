@@ -8,7 +8,7 @@
 
 **Maintainer** plugin for the openEHR Assistant ecosystem. It helps developers **design, implement, test, document, and release** new MCP tools, prompts, resources, guides, completion providers, and examples for the two sibling projects:
 
-- **[openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp)** — the PHP 8.4 MCP server.
+- **[openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp)** — the openEHR Assistant MCP server.
 - **[openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin)** — the user-facing Claude Code + Cursor plugin.
 
 > This is **not** an end-user clinical tool. For clinical modelling, archetype/template authoring, AQL, and CKM discovery, install the user-facing **[openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin)** instead. This plugin is for people *building* that tooling.

@@ -6,7 +6,7 @@ This file provides guidance to AI coding assistants working in this repository. 
 
 The **openEHR Assistant Dev Plugin** is a **maintainer-facing** AI plugin by Cadasto B.V. It is *not* an end-user clinical tool. Its purpose is to help maintainers **design, implement, test, document, and release** new MCP tools, prompts, resources, guides, completion providers, and examples for the two sibling projects:
 
-- **[openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp)** — the PHP 8.4 MCP server (tools, prompts, resources, guides, examples, BMM, terminology).
+- **[openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp)** — the openEHR Assistant MCP server (tools, prompts, resources, guides, examples, BMM, terminology).
 - **[openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin)** — the user-facing Claude Code + Cursor plugin (skills, commands, agents, hooks) that wraps the MCP server.
 
 This plugin supplies the **authoring and release workflow layer** for those repos: which conventions apply where, how to add an artefact correctly, how to test it in the Docker dev container, and how to keep the two repos version-aligned.
@@ -59,6 +59,23 @@ This repo supports **both Claude Code and Cursor**; shared assets (skills, agent
 
 This plugin does **not** bundle a `.mcp.json`. Maintainers test against a **local** MCP server (`streamable-http` on `:8343` via `make up-dev`, or `stdio`), not the hosted production instance. Skill `allowed-tools` still reference `mcp__openehr-assistant__*` tools; the host resolves them from whatever openEHR Assistant MCP server the developer already has configured (typically the user-facing plugin or a local dev instance).
 
+### Testing & validating this plugin
+
+No build step — pure Markdown + JSON. Validate and dogfood locally:
+
+```bash
+claude plugin validate .                                  # manifest + component structure
+claude plugin add /path/to/openehr-assistant-dev-plugin   # install locally
+```
+
+Then open one of the target repos and confirm the `SessionStart` hook detects it and the intended skills trigger. This plugin is published in the Cadasto marketplace — once released, users install it with `/plugin install openehr-assistant-dev@cadasto`.
+
+### Gotchas
+
+- **Cursor hooks use a workspace-relative command** (`bash hooks/session-start.sh`), *not* `${CLAUDE_PLUGIN_ROOT}` — that variable is Claude-Code-only; Cursor resolves hook commands from the plugin root. Keep the two hook configs in step, but do not "fix" the Cursor one to use the Claude variable.
+- **MCP discovery is cached** in the server repo. After adding or renaming a tool/resource/prompt class, clear the discovery cache (under `XDG_DATA_HOME`, default `/tmp`) or the new capability won't register — see the `mcp-tool-authoring` skill.
+- **`.mcp.json` is intentionally absent** (see *MCP wiring* above) — don't add one pointing at the hosted server.
+
 ## Working in the MCP repo (`openehr-assistant-mcp`)
 
 ### Docker-only runtime (critical)
@@ -100,6 +117,12 @@ When authoring or editing guides, prompts, BMM JSON, terminology data, AQL gramm
 5. **Development branch, not latest** — track `releases/XX/development/`; use a fixed release tag only when explicitly required.
 
 ## Conventions for this repo (the dev plugin itself)
+
+### Authoring skills & agents here
+Because this plugin's whole job is authoring tooling, its own components must be exemplary:
+- **Scope every skill to the maintainer context.** A skill `description` must trigger ONLY when a contributor is changing one of the target repos, and must carry an explicit "Do NOT trigger" clause routing end-user openEHR work (modelling, AQL, CKM) to the user-facing `openehr-assistant` plugin. An end user must never trip a dev skill — name the strongest signal (workspace is the specific repo + the target file tree).
+- **Defer to the target repo's `AGENTS.md`.** Skills summarise and operationalise those conventions; they never restate them as the source of truth.
+- **Skills-first, lean, imperative.** Add user-invocable workflows as `skills/<name>/SKILL.md` (no `commands/`). Keep bodies lean (≈1,000 words), use imperative voice, and explain *why* a step matters rather than relying on bare `MUST`/`NEVER`.
 
 ### CHANGELOG style
 - Entries under `## [Unreleased]` while in flight, folded into `## [X.Y.Z] - YYYY-MM-DD` at release.
