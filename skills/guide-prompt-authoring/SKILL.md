@@ -1,15 +1,12 @@
 ---
 name: guide-prompt-authoring
 description: >
-  Developer/maintainer skill for the openehr-assistant-mcp codebase. This skill should be used ONLY when
-  a contributor is adding or changing content IN that repository — i.e. authoring new implementation
-  guides under `resources/guides/` or new MCP prompt files under `resources/prompts/` + `src/Prompts/`.
-  Trigger phrases: "create/add/write a guide", "create/add/write an MCP prompt", "author guide/prompt
-  content". Strongest signal: the workspace is the MCP server repo (composer.json with
-  `Cadasto\OpenEHR\MCP\Assistant`, a `resources/guides/` or `src/Prompts/` tree).
-  Do NOT trigger for end-user openEHR work — browsing/reading a guide, asking a modelling question, or
-  writing a one-off prompt unrelated to authoring repo guide/prompt files. That is ordinary usage served
-  by the user-facing `openehr-assistant` plugin, not this maintainer skill.
+  Authors openEHR Assistant implementation guides (`resources/guides/`) and MCP prompts
+  (`resources/prompts/` + `src/Prompts/`) in the openehr-assistant-mcp repository. This skill should be
+  used when a contributor asks to "create/add/write a guide", "create/add/write an MCP prompt", or
+  "author guide/prompt content"; strongest signal is that the workspace is the MCP server repo.
+  Not for end-user openEHR work — browsing a guide or asking a modelling question belongs to the
+  user-facing `openehr-assistant` plugin.
 argument-hint: "<type: guide|prompt> <category/name or prompt-name> [topic description]"
 allowed-tools:
   - Read

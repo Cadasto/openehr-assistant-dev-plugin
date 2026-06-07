@@ -1,15 +1,12 @@
 ---
 name: example-authoring
 description: >
-  Developer/maintainer skill for the openehr-assistant-mcp server codebase. This skill should be used
-  ONLY when a contributor is adding a curated worked example to that repo's `resources/examples/` corpus
-  (the `openehr://examples/{aql|flat|structured|archetypes}` namespace) with the correct metadata
-  headers. Trigger phrases: "add a curated example", "add a reference AQL/FLAT/STRUCTURED example to the
-  examples corpus", "add a reference archetype example", "author an examples entry". Strongest signal:
-  the workspace is the MCP repo and the edit targets files under `resources/examples/`.
-  Do NOT trigger when an end user simply wants an AQL query, a FLAT/STRUCTURED payload, or an example for
-  their own clinical work — that is ordinary openEHR usage served by the user-facing `openehr-assistant`
-  plugin (e.g. its aql-query / composition-builder skills), not this maintainer skill.
+  Authors curated worked examples in the openehr-assistant-mcp repo's `resources/examples/` corpus
+  (the `openehr://examples/{aql|flat|structured|archetypes}` namespace). This skill should be used when
+  a contributor asks to "add a curated example", "add a reference AQL/FLAT/STRUCTURED example to the
+  examples corpus", or "author an examples entry"; strongest signal is editing files under
+  `resources/examples/`. Not for an end user wanting an AQL query or payload for their own clinical work
+  — that is the user-facing `openehr-assistant` plugin (its aql-query / composition-builder skills).
 argument-hint: "<kind: aql|flat|structured|archetypes> <name> [pattern/topic]"
 allowed-tools:
   - Read

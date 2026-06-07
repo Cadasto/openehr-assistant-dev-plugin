@@ -100,6 +100,6 @@ PR checklist:
 - Follow Semantic Versioning and maintain `CHANGELOG.md` (Keep a Changelog format).
 
 ## Security
-Do not open public issues for security vulnerabilities. Report privately using GitHub's security advisories or contact the maintainers directly.
+Do not open public issues for security vulnerabilities. See [SECURITY.md](SECURITY.md) for the threat model and private reporting process. This project follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 Thank you for contributing!

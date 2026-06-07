@@ -9,6 +9,18 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
+### Added
+
+- `scripts/validate.py` + `scripts/validate.sh` (graceful wrapper — warns and skips if Python is absent) + `.github/workflows/validate.yml` (pins Python, strict) — validation of manifests, dual-host parity, and frontmatter (adapted from `openehr/ai-plugins`).
+- `.claude/` — `settings.json` (enables maintainer plugins) and `CLAUDE.md` delegating to `AGENTS.md`.
+- `.github/` — issue templates (`proposal`, `skill-bug`) and `PULL_REQUEST_TEMPLATE.md`.
+- `docs/` — `install`, `testing`, `versioning`, and `skill-authoring` references.
+- `CODE_OF_CONDUCT.md` and `SECURITY.md` (content-integrity / supply-chain threat model and private reporting).
+
+### Changed
+
+- Skills: tightened the four skill `description`s to the lean three-part triggering pattern (scope anchor + triggers + anti-trigger).
+
 ## [0.1.0] - 2026-06-07
 
 ### Added

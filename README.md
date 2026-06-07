@@ -91,9 +91,18 @@ To point at a local server, add an `.mcp.json` of your own, e.g.:
 
 ---
 
+## Documentation
+
+| Doc | Purpose |
+|-----|---------|
+| [docs/install.md](docs/install.md) | Install/update on Claude Code and Cursor |
+| [docs/testing.md](docs/testing.md) | Validation (`scripts/validate.py`) and local triggering tests |
+| [docs/versioning.md](docs/versioning.md) | SemVer policy and release steps |
+| [docs/skill-authoring.md](docs/skill-authoring.md) | Skill/agent authoring conventions (the lean description pattern) |
+
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for maintainer workflows and [AGENTS.md](AGENTS.md) for the full conventions used by AI assistants in this repo. See [CHANGELOG.md](CHANGELOG.md) for release notes.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for maintainer workflows and [AGENTS.md](AGENTS.md) for the full conventions used by AI assistants in this repo. Run `./scripts/validate.sh` before opening a PR (it warns and skips if Python isn't installed; CI runs the full check). See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ---
 

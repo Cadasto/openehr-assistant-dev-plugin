@@ -1,15 +1,11 @@
 ---
 name: release-workflow
 description: >
-  Developer/maintainer skill for releasing the openEHR Assistant projects. This skill should be used
-  ONLY when a maintainer is preparing a release of the openehr-assistant-mcp server or the
-  openehr-assistant-plugin (or this dev plugin) — covering Semantic Versioning, Keep-a-Changelog
-  curation, plugin manifest sync (`.claude-plugin` / `.cursor-plugin`), and mcp <-> plugin compatibility
-  alignment. Trigger phrases: "cut a release", "bump the version", "prepare a release", "update the
-  changelog", "sync the plugin manifests", "bump openehr-assistant-mcp compatibility". Strongest signal:
-  the workspace is one of these repos.
-  Do NOT trigger for releasing unrelated projects or for general versioning/changelog questions — only
-  for releases of these openEHR Assistant repos.
+  Releases the openEHR Assistant projects: SemVer bump, Keep-a-Changelog curation, dual-host manifest
+  sync, and mcp<->plugin compatibility alignment. This skill should be used when a maintainer asks to
+  "cut a release", "bump the version", "prepare a release", "update the changelog", or "bump
+  openehr-assistant-mcp compatibility" for the openehr-assistant-mcp server, the openehr-assistant
+  plugin, or this dev plugin. Not for releasing unrelated projects or general versioning questions.
 argument-hint: "<repo: mcp|plugin> <version X.Y.Z> [--align-mcp X.Y.Z]"
 allowed-tools:
   - Read

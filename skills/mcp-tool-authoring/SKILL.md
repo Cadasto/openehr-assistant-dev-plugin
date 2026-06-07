@@ -1,15 +1,12 @@
 ---
 name: mcp-tool-authoring
 description: >
-  Developer/maintainer skill for the openehr-assistant-mcp server codebase. This skill should be used
-  ONLY when a contributor is adding or changing capabilities IN that MCP server repo — authoring
-  `#[McpTool]`, `#[McpResource]`, `#[McpResourceTemplate]`, or CompletionProvider classes in `src/`
-  with matching PHPUnit tests, run via the Docker dev container. Trigger phrases: "add an MCP tool",
-  "create a new tool", "add a resource / resource template", "add a completion provider", "expose a new
-  capability" — in this server. Strongest signal: the workspace is the openehr-assistant-mcp repo
-  (composer.json with `Cadasto\OpenEHR\MCP\Assistant`, a `src/Tools/` tree).
-  Do NOT trigger for generic MCP development in other projects, or for end-user openEHR/MCP usage
-  questions — only for authoring capabilities in this specific server.
+  Authors and extends MCP capabilities (`#[McpTool]`, `#[McpResource]`, `#[McpResourceTemplate]`,
+  completion providers) with PHPUnit tests in the openehr-assistant-mcp server repository. This skill
+  should be used when a contributor asks to "add an MCP tool", "add a resource / resource template",
+  "add a completion provider", or "expose a new capability" in this server; strongest signal is that the
+  workspace is that repo (a `src/Tools/` tree). Not for generic MCP development in other projects, or
+  end-user openEHR/MCP usage questions.
 argument-hint: "<tool|resource|resource-template|completion-provider> <name> [description]"
 allowed-tools:
   - Read

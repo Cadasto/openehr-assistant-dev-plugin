@@ -52,8 +52,11 @@ This repo supports **both Claude Code and Cursor**; shared assets (skills, agent
 - **Cursor hooks**: `hooks/cursor-hooks.json` — object `{ "hooks": { "sessionStart": [...] } }`; command runs from plugin root.
 - **Shared hook script**: `hooks/session-start.sh` — detects the target repo and prints context.
 - **Cursor rules**: `rules/` — `.mdc` files (e.g. `dev-context.mdc`) for Cursor-only rule guidance.
-- **Skills**: `skills/<name>/SKILL.md`, each with YAML frontmatter.
+- **Skills**: `skills/<name>/SKILL.md`, each with YAML frontmatter (optional `references/` subdir).
 - **Agents**: `agents/<name>.md`, each with YAML frontmatter.
+- **Claude settings**: `.claude/settings.json` enables the maintainer plugins (skill-creator, superpowers, plugin-dev, claude-md-management); `.claude/CLAUDE.md` imports this file via `@../AGENTS.md`.
+- **Validation**: `scripts/validate.sh` (graceful local wrapper — warns and skips if Python is absent) runs `scripts/validate.py`, which checks manifests, dual-host parity, declared paths, and frontmatter. CI pins Python and runs the validator strictly.
+- **Docs**: `docs/` holds human-facing install / testing / versioning / skill-authoring references; `.github/` holds issue + PR templates and the validate workflow.
 
 ### MCP wiring
 
@@ -64,11 +67,12 @@ This plugin does **not** bundle a `.mcp.json`. Maintainers test against a **loca
 No build step — pure Markdown + JSON. Validate and dogfood locally:
 
 ```bash
-claude plugin validate .                                  # manifest + component structure
+./scripts/validate.sh                                     # manifests, dual-host parity, frontmatter (warns & skips if Python is absent)
+claude plugin validate .                                  # manifest + component structure (no Python needed)
 claude plugin add /path/to/openehr-assistant-dev-plugin   # install locally
 ```
 
-Then open one of the target repos and confirm the `SessionStart` hook detects it and the intended skills trigger. This plugin is published in the Cadasto marketplace — once released, users install it with `/plugin install openehr-assistant-dev@cadasto`.
+Then open one of the target repos and confirm the `SessionStart` hook detects it and the intended skills trigger. This plugin is published in the Cadasto marketplace — once released, users install it with `/plugin install openehr-assistant-dev@cadasto`. Fuller guidance lives in [`docs/`](docs/): [install](docs/install.md), [testing](docs/testing.md), [versioning](docs/versioning.md), and [skill-authoring](docs/skill-authoring.md). CI pins Python and runs `scripts/validate.py` strictly on every push/PR ([`.github/workflows/validate.yml`](.github/workflows/validate.yml)); locally, `scripts/validate.sh` runs the same checks but warns and skips if Python isn't installed.
 
 ### Gotchas
 
@@ -119,8 +123,8 @@ When authoring or editing guides, prompts, BMM JSON, terminology data, AQL gramm
 ## Conventions for this repo (the dev plugin itself)
 
 ### Authoring skills & agents here
-Because this plugin's whole job is authoring tooling, its own components must be exemplary:
-- **Scope every skill to the maintainer context.** A skill `description` must trigger ONLY when a contributor is changing one of the target repos, and must carry an explicit "Do NOT trigger" clause routing end-user openEHR work (modelling, AQL, CKM) to the user-facing `openehr-assistant` plugin. An end user must never trip a dev skill — name the strongest signal (workspace is the specific repo + the target file tree).
+Because this plugin's whole job is authoring tooling, its own components must be exemplary. Full conventions live in [`docs/skill-authoring.md`](docs/skill-authoring.md); the essentials:
+- **Scope every skill to the maintainer context.** Use the lean three-part `description` pattern (≈50–75 words): a *what + scope* sentence anchored to the target repo, 3–5 representative *triggers*, and a short *anti-trigger* ("Not for …") routing end-user openEHR work (modelling, AQL, CKM) to the user-facing `openehr-assistant` plugin. An end user must never trip a dev skill — name the strongest signal (workspace is the specific repo + the target file tree).
 - **Defer to the target repo's `AGENTS.md`.** Skills summarise and operationalise those conventions; they never restate them as the source of truth.
 - **Skills-first, lean, imperative.** Add user-invocable workflows as `skills/<name>/SKILL.md` (no `commands/`). Keep bodies lean (≈1,000 words), use imperative voice, and explain *why* a step matters rather than relying on bare `MUST`/`NEVER`.
 
