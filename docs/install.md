@@ -9,17 +9,21 @@ This plugin is distributed for both [Claude Code](https://docs.claude.com/en/doc
 ### Install (from the Cadasto marketplace)
 
 ```
-/plugin marketplace add cadasto/plugin-marketplace
+/plugin marketplace add Cadasto/plugin-marketplace
 /plugin install openehr-assistant-dev@cadasto
 ```
 
 The marketplace name is `cadasto`, so installed plugins are addressed as `<plugin>@cadasto`.
 
-### Install (local working copy, for development)
+### Load a local working copy (for development)
 
 ```bash
-claude plugin add /path/to/openehr-assistant-dev-plugin
+claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 ```
+
+`--plugin-dir` loads the plugin from disk for **that session only** — it does not persist, which makes it the right tool for dogfooding an unreleased working copy. It is repeatable (`--plugin-dir A --plugin-dir B`) and also accepts a `.zip`.
+
+Claude Code has **no `plugin add` subcommand**. `claude plugin install` resolves names from a configured marketplace, not filesystem paths, and `claude plugin marketplace add <path>` expects a marketplace manifest (`.claude-plugin/marketplace.json`) — which a single-plugin repository like this one does not have. For a persistent install, go through the marketplace above.
 
 ### Update / inspect
 

@@ -17,11 +17,11 @@ Thank you for your interest in contributing! This plugin is **maintainer tooling
 Prerequisites:
 - [Claude Code](https://claude.ai/code) CLI and/or [Cursor](https://cursor.com).
 
-Clone and install:
+Clone and load it for a session:
 ```bash
 git clone <your-fork-url>
 cd openehr-assistant-dev-plugin
-claude plugin add .
+claude --plugin-dir .
 ```
 
 No build step is required — the plugin is pure markdown and JSON.
@@ -78,9 +78,9 @@ When adding or renaming components, update all references in:
 
 ## Testing locally
 
-Install from a local path:
+Load from a local path:
 ```bash
-claude plugin add /path/to/openehr-assistant-dev-plugin
+claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 ```
 
 Verify components work by opening one of the target repos and confirming the SessionStart hook detects it, then invoke a skill (e.g. ask to "create a guide" inside the MCP repo).
@@ -90,7 +90,7 @@ Verify components work by opening one of the target repos and confirming the Ses
 - One logical change per PR. Link related issues with GitHub keywords (e.g., `Fixes #123`).
 
 PR checklist:
-- [ ] Component works when tested locally with `claude plugin add .`
+- [ ] Component works when tested locally with `claude --plugin-dir .`
 - [ ] All references updated (AGENTS.md, README.md, hooks)
 - [ ] CHANGELOG.md updated
 - [ ] No debug code or leftover comments

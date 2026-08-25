@@ -1,6 +1,6 @@
-# Testing and Validation
+# Testing and validation
 
-This is a pure-content repository — JSON manifests + markdown skills/agents + a hook script. There is no build step or package manager. Testing means validating structure, then installing locally and exercising the skills against the target repos.
+This is a pure-content repository — JSON manifests + markdown skills/agents + a hook script, with no build step and no package manager. Testing means validating structure, then installing locally and exercising the skills against the target repos.
 
 ## Validation
 
@@ -14,9 +14,9 @@ This is a pure-content repository — JSON manifests + markdown skills/agents + 
 
 Install from your working copy (see [install.md](install.md)), then open a checkout of a target repo and confirm behaviour:
 
-- Open **openehr-assistant-mcp** → the `SessionStart` hook should announce the MCP-server context and the authoring skills should trigger on their documented phrases (e.g. "add an MCP tool", "create a guide").
+- Open **openehr-assistant-mcp** → the `SessionStart` hook should announce the MCP-server context and the authoring skills should trigger on their documented phrases (for example "add an MCP tool", "create a guide").
 - Open **openehr-assistant-plugin** → the hook should announce the plugin context.
-- **Anti-trigger check (important):** in an ordinary end-user openEHR session (e.g. "write me an AQL query for blood pressure"), the dev skills must **not** trigger — that work belongs to the user-facing plugin. See each skill's `description` for its anti-trigger boundary and [skill-authoring.md](skill-authoring.md).
+- **Anti-trigger check (important):** in an ordinary end-user openEHR session (for example "write me an AQL query for blood pressure"), the dev skills must **not** trigger — that work belongs to the user-facing plugin. See each skill's `description` for its anti-trigger boundary and [skill-authoring.md](skill-authoring.md).
 
 After editing content, reinstall (or restart the session) to pick up changes.
 
