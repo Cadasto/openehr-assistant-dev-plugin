@@ -7,7 +7,9 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - Keep a Changelog: [https://keepachangelog.com/en/1.1.0/](https://keepachangelog.com/en/1.1.0/)
 - Semantic Versioning: [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html)
 
-## [Unreleased]
+## [0.3.0] - 2026-08-25
+
+Corrects an install command that never existed, propagated into the `release-workflow` skill and the `repo-conventions-scout` agent and from there into the repos this plugin documents. `release-workflow` also gains the marketplace repin step, without which a tagged release reaches nobody.
 
 ### Changed
 - Docs: `README.md` — the version badge reads the latest GitHub release instead of a hardcoded `0.2.0`, so it cannot fall behind a tag. Verified it renders `v0.2.0` today.

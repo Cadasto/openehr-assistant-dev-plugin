@@ -1,7 +1,7 @@
 {
   "name": "openehr-assistant-dev",
   "displayName": "openEHR Assistant Dev",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Maintainer plugin for developing the openEHR Assistant MCP server and plugin — authoring guides, prompts, MCP tools, examples, and managing releases",
   "author": {
     "name": "Cadasto B.V.",
