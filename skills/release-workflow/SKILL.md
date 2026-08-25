@@ -88,6 +88,20 @@ The user-facing **plugin** declares compatibility with a specific **MCP** server
 
 Only commit/tag/push when the user explicitly asks. Suggested commit: `chore(release): vX.Y.Z`. Suggested tag: `vX.Y.Z` (match the repo's existing tag convention — check `git tag` first).
 
+## Step 6: Repin the marketplace entry (both plugin repos)
+
+Applies to `openehr-assistant-plugin` and `openehr-assistant-dev-plugin`, not the MCP server.
+
+Both are listed in [`Cadasto/plugin-marketplace`](https://github.com/Cadasto/plugin-marketplace), whose catalog **pins each entry to a release tag**. Pushing the tag does not ship the release — users see nothing until the catalog entry moves. Treat the release as incomplete until it does.
+
+In `.claude-plugin/marketplace.json` of that repo:
+
+1. Bump the entry's `version` **and** `source.ref` to the new `vX.Y.Z` together — its validator rejects a mismatch.
+2. Bump the catalog's own `metadata.version`: a plugin minor/major is a catalog **minor**, a plugin patch a catalog **patch**.
+3. Add a `CHANGELOG.md` line, then run `python3 scripts/validate.py --fix` (regenerates the Cursor twin) and `claude plugin validate .`.
+
+The catalog copies `description`, `version`, and `keywords` verbatim from `.claude-plugin/plugin.json`, so a wording change to any of those needs the entry updated too — even without a release.
+
 ## Checklist
 - [ ] SemVer bump correct for the change set
 - [ ] CHANGELOG: `[Unreleased]` folded into dated section; groups ordered; every commit represented once
@@ -97,3 +111,4 @@ Only commit/tag/push when the user explicitly asks. Suggested commit: `chore(rel
 - [ ] Bundled archetype corpus synced + `Synced from:` updated (if archetypes changed)
 - [ ] Docs synced (AGENTS.md, README.md, session-start.sh)
 - [ ] Tests/lint green (MCP, in Docker); plugins smoke-tested
+- [ ] Marketplace entry repinned in `Cadasto/plugin-marketplace` (plugin repos only) — `version` + `source.ref` bumped together, catalog `metadata.version` and CHANGELOG updated

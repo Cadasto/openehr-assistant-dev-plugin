@@ -9,6 +9,10 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
+### Changed
+- Skills: `release-workflow` — new Step 6 and checklist item: repin the entry in `Cadasto/plugin-marketplace` for both plugin repos. The catalog pins each entry to a release tag, so pushing the tag no longer ships the release.
+- Docs: `docs/versioning.md` — the marketplace no longer tracks `main`; added as release step 6.
+
 ## [0.2.0] - 2026-06-07
 
 ### Added
