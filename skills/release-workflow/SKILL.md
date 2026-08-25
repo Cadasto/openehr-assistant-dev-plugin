@@ -83,7 +83,7 @@ The user-facing **plugin** declares compatibility with a specific **MCP** server
 ## Step 5: Verify before tagging
 
 - **MCP** (Docker dev container, never host): `composer test` and `composer check:phpstan` green; optionally `make conformance`.
-- **Plugins**: install locally (`claude plugin add .`) and smoke-test a representative skill/command.
+- **Plugins**: load locally (`claude --plugin-dir .`) and smoke-test a representative skill/command.
 - Confirm working tree contains exactly the intended release delta: `git status`, `git diff`.
 
 Only commit/tag/push when the user explicitly asks. Suggested commit: `chore(release): vX.Y.Z`. Suggested tag: `vX.Y.Z` (match the repo's existing tag convention — check `git tag` first).

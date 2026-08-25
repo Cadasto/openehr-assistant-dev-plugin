@@ -69,7 +69,7 @@ Return a briefing with these sections (omit any that don't apply):
 1. **Repo** — `mcp` | `plugin` | `dev` | `unknown`, and one line on its purpose.
 2. **Layout** — the directories relevant to the task and what goes in each.
 3. **Conventions** — the rules that matter for the task (coding standard, naming, attribute usage, CHANGELOG style, Guide-First, spec-alignment, dual-host).
-4. **Dev commands** — exact commands. For **mcp**, emphasise the **Docker-only** workflow (`make up-dev`, `make install`, `docker compose … exec … app composer test`, `make conformance`) — never host PHP/Composer. For **plugins**, note "no build; `claude plugin add .`".
+4. **Dev commands** — exact commands. For **mcp**, emphasise the **Docker-only** workflow (`make up-dev`, `make install`, `docker compose … exec … app composer test`, `make conformance`) — never host PHP/Composer. For **plugins**, note "no build; `claude --plugin-dir .`".
 5. **Cross-repo obligations** — what must stay in sync (e.g. mcp surface change → plugin `allowed-tools`, compatibility pointer, bundled archetype corpus; plugin component change → `AGENTS.md`/`README.md`/`session-start.sh`).
 6. **Which dev-plugin skill fits** — `guide-prompt-authoring`, `mcp-tool-authoring`, `example-authoring`, or `release-workflow`.
 

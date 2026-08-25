@@ -36,19 +36,20 @@
 
 ## Installation
 
-**Claude Code**
+**Claude Code** — from the Cadasto marketplace:
+
+```
+/plugin marketplace add Cadasto/plugin-marketplace
+/plugin install openehr-assistant-dev@cadasto
+```
+
+Or load a local working copy for a single session, while developing:
 
 ```bash
-claude plugin add cadasto/openehr-assistant-dev-plugin
+claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 ```
 
 **Cursor** — Add the plugin via Cursor's plugin flow (Git URL or local path). The repo includes a Cursor manifest at [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json); skills, rules, agents, and hooks are shared with the Claude plugin.
-
-Install from a local path while developing:
-
-```bash
-claude plugin add /path/to/openehr-assistant-dev-plugin
-```
 
 ---
 

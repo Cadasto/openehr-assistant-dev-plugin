@@ -69,7 +69,7 @@ No build step — pure Markdown + JSON. Validate and dogfood locally:
 ```bash
 ./scripts/validate.sh                                     # manifests, dual-host parity, frontmatter (warns & skips if Python is absent)
 claude plugin validate .                                  # manifest + component structure (no Python needed)
-claude plugin add /path/to/openehr-assistant-dev-plugin   # install locally
+claude --plugin-dir /path/to/openehr-assistant-dev-plugin # load locally for one session
 ```
 
 Then open one of the target repos and confirm the `SessionStart` hook detects it and the intended skills trigger. This plugin is published in the Cadasto marketplace — once released, users install it with `/plugin install openehr-assistant-dev@cadasto`. Fuller guidance lives in [`docs/`](docs/): [install](docs/install.md), [testing](docs/testing.md), [versioning](docs/versioning.md), and [skill-authoring](docs/skill-authoring.md). CI pins Python and runs `scripts/validate.py` strictly on every push/PR ([`.github/workflows/validate.yml`](.github/workflows/validate.yml)); locally, `scripts/validate.sh` runs the same checks but warns and skips if Python isn't installed.

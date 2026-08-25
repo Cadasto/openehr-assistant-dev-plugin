@@ -13,6 +13,10 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - Skills: `release-workflow` — new Step 6 and checklist item: repin the entry in `Cadasto/plugin-marketplace` for both plugin repos. The catalog pins each entry to a release tag, so pushing the tag no longer ships the release.
 - Docs: `docs/versioning.md` — the marketplace no longer tracks `main`; added as release step 6.
 
+### Fixed
+- Docs: `claude plugin add` is not a Claude Code command. `README.md`, `docs/install.md`, `CONTRIBUTING.md`, and `AGENTS.md` load a local working copy with `claude --plugin-dir <path>`, which applies to that session only; the README's Claude Code install now shows the marketplace flow.
+- Skills, Agents: `release-workflow` and `repo-conventions-scout` carried the same non-existent command and propagated it into the repos they document.
+
 ## [0.2.0] - 2026-06-07
 
 ### Added
