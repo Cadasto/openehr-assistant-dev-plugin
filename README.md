@@ -1,7 +1,7 @@
 # openEHR Assistant Dev Plugin
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/github/v/release/Cadasto/openehr-assistant-dev-plugin?label=version)](https://github.com/Cadasto/openehr-assistant-dev-plugin/releases)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-plugin-D97757?logo=anthropic&logoColor=white)](https://claude.ai/code)
 [![Cursor](https://img.shields.io/badge/Cursor-plugin-000?logo=cursor&logoColor=white)](https://cursor.com)
 [![Keep a Changelog](https://img.shields.io/badge/Keep%20a%20Changelog-1.1.0-E05735)](CHANGELOG.md)
@@ -19,6 +19,7 @@
 - [Installation](#installation)
 - [Components](#components)
 - [MCP wiring](#mcp-wiring)
+- [Documentation](#documentation)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -80,7 +81,7 @@ claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 
 This plugin does **not** bundle a `.mcp.json`. Maintainers test against a **local** MCP server (`make up-dev` exposes `streamable-http` on `:8343`, or use `stdio`), not the hosted production instance. Skill `allowed-tools` reference `mcp__openehr-assistant__*` tools; your host resolves them from whatever openEHR Assistant MCP server you already have configured (the user-facing plugin or a local dev instance).
 
-To point at a local server, add an `.mcp.json` of your own, e.g.:
+To point at a local server, add an `.mcp.json` of your own:
 
 ```json
 {

@@ -10,10 +10,15 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ## [Unreleased]
 
 ### Changed
+- Docs: `README.md` — the version badge reads the latest GitHub release instead of a hardcoded `0.2.0`, so it cannot fall behind a tag. Verified it renders `v0.2.0` today.
+- Docs: `docs/versioning.md` — release steps now include **cutting the GitHub release** (step 6), which the repo has always done but never documented; the marketplace repin follows as step 7. Matches the org rule in the catalog's own versioning doc: every tag carries a release titled exactly the tag name, with the CHANGELOG section as the body.
+- Docs: `docs/install.md` — the marketplace command uses the canonical `Cadasto` casing, matching `README.md`; the two disagreed in the same command.
+- Docs: sentence-case H1s in `docs/testing.md`, `docs/versioning.md`, `docs/skill-authoring.md`; "for example" over "e.g."; `docs/testing.md` opens with its subject rather than "There is".
 - Skills: `release-workflow` — new Step 6 and checklist item: repin the entry in `Cadasto/plugin-marketplace` for both plugin repos. The catalog pins each entry to a release tag, so pushing the tag no longer ships the release.
-- Docs: `docs/versioning.md` — the marketplace no longer tracks `main`; added as release step 6.
+- Docs: `docs/versioning.md` — the marketplace no longer tracks `main`; added as a release step.
 
 ### Fixed
+- Docs: `README.md` — the table of contents omitted the **Documentation** section, so the four `docs/` references were unreachable from the contents list.
 - Docs: `claude plugin add` is not a Claude Code command. `README.md`, `docs/install.md`, `CONTRIBUTING.md`, and `AGENTS.md` load a local working copy with `claude --plugin-dir <path>`, which applies to that session only; the README's Claude Code install now shows the marketplace flow.
 - Skills, Agents: `release-workflow` and `repo-conventions-scout` carried the same non-existent command and propagated it into the repos they document.
 

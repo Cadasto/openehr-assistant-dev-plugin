@@ -9,7 +9,7 @@ This plugin is distributed for both [Claude Code](https://docs.claude.com/en/doc
 ### Install (from the Cadasto marketplace)
 
 ```
-/plugin marketplace add cadasto/plugin-marketplace
+/plugin marketplace add Cadasto/plugin-marketplace
 /plugin install openehr-assistant-dev@cadasto
 ```
 
