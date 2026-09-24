@@ -2,13 +2,13 @@
 
 ## Threat Model
 
-This repository distributes **AI-assistant instruction content** — a maintainer plugin of skills, agents, hooks, and manifests. The relevant security concerns are therefore content-integrity and supply-chain issues rather than classic software vulnerabilities:
+This repository distributes **AI-assistant instruction content**: a maintainer plugin of skills, agents, hooks, and manifests. The relevant security concerns are content-integrity and supply-chain issues rather than classic software vulnerabilities:
 
-- **Malicious or manipulative skill/agent content** — instructions in a `SKILL.md`, an agent file, or its `references/` designed to make an AI assistant exfiltrate data, execute harmful commands, or act against the user's interest (prompt injection via plugin content).
-- **Manifest tampering** — a `plugin.json` pointing at unexpected sources or misrepresenting plugin identity.
-- **Typosquatting** — plugin, skill, or agent names crafted to impersonate official openEHR Assistant plugins.
-- **Malicious hook scripts** — `hooks/session-start.sh` (or any future hook) performing unexpected, mutating, or network operations. Hooks here must stay read-only reconnaissance.
-- **Malicious external references** — content linking to harmful or impersonating external resources.
+- **Malicious or manipulative skill/agent content**: instructions in a `SKILL.md`, an agent file, or its `references/` designed to make an AI assistant exfiltrate data, execute harmful commands, or act against the user's interest (prompt injection via plugin content).
+- **Manifest tampering**: a `plugin.json` pointing at unexpected sources or misrepresenting plugin identity.
+- **Typosquatting**: plugin, skill, or agent names crafted to impersonate official openEHR Assistant plugins.
+- **Malicious hook scripts**: `hooks/session-start.sh` (or any future hook) performing unexpected, mutating, or network operations. Hooks here must stay read-only reconnaissance.
+- **Malicious external references**: content linking to harmful or impersonating external resources.
 
 ## Reporting a Vulnerability
 
@@ -21,10 +21,10 @@ You can expect an acknowledgement within 7 days. Confirmed issues are fixed in a
 
 ## Supported Versions
 
-Only the **latest released version** (latest `vX.Y.Z` tag) is supported. Keep the plugin updated via your assistant's update mechanism — e.g. `/plugin update openehr-assistant-dev` in Claude Code.
+Only the **latest released version** (latest `vX.Y.Z` tag) is supported. Keep the plugin updated through your assistant's update mechanism, for example `/plugin update openehr-assistant-dev` in Claude Code.
 
 ## Out of Scope
 
-- Vulnerabilities in Claude Code, Cursor, or other AI assistants themselves — report to the respective vendor (e.g. [Anthropic](https://www.anthropic.com/security)).
-- Vulnerabilities in the companion [openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp) server or the user-facing [openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin) — report on those repositories.
-- Issues in the openEHR specifications — raise via the [openEHR Jira](https://openehr.atlassian.net/) (SPEC* projects).
+- Vulnerabilities in Claude Code, Cursor, or other AI assistants themselves: report to the respective vendor (for example, [Anthropic](https://www.anthropic.com/security)).
+- Vulnerabilities in the companion [openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp) server or the user-facing [openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin): report on those repositories.
+- Issues in the openEHR specifications: raise them through the [openEHR Jira](https://openehr.atlassian.net/) (SPEC* projects).

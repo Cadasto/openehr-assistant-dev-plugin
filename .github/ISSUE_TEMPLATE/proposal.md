@@ -9,7 +9,7 @@ labels: enhancement
 **What developer task should it support:**
 
 **Why it belongs in the dev plugin:**
-<!-- Must help maintainers build/test/document/release the openEHR Assistant MCP server or plugin — not end-user openEHR work (that belongs to the user-facing openehr-assistant plugin). -->
+<!-- Must help maintainers build/test/document/release the openEHR Assistant MCP server or plugin, not end-user openEHR work (that belongs to the user-facing openehr-assistant plugin). -->
 
 **Example trigger phrases:**
 

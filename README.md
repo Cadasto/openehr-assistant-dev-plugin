@@ -6,40 +6,35 @@
 [![Cursor](https://img.shields.io/badge/Cursor-plugin-000?logo=cursor&logoColor=white)](https://cursor.com)
 [![Keep a Changelog](https://img.shields.io/badge/Keep%20a%20Changelog-1.1.0-E05735)](CHANGELOG.md)
 
-**Maintainer** plugin for the openEHR Assistant ecosystem. It helps developers **design, implement, test, document, and release** new MCP tools, prompts, resources, guides, completion providers, and examples for the two sibling projects:
+A maintainer plugin by **Cadasto B.V.** for the people who build the openEHR Assistant tooling: the **[openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp)** server and the user-facing **[openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin)** for Claude Code and Cursor. It helps them **design, implement, test, document, and release** new MCP tools, prompts, resources, guides, completion providers, and examples, and keep the two repositories version-aligned. It adds four skills, one agent, a session-start hook, and a Cursor rule, shared by **Claude Code** and **Cursor** from one component set.
 
-- **[openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp)** — the openEHR Assistant MCP server.
-- **[openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin)** — the user-facing Claude Code + Cursor plugin.
+The plugin owns the authoring and release workflow for those two repositories: which conventions apply where, how to add an artefact correctly, and how to test it in the MCP server's Docker dev container. It is **not** an end-user clinical tool. Clinical modelling, archetype and template authoring, AQL, and CKM discovery belong to the user-facing [openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin); install that one to *use* openEHR, and this one to *build* the tooling. Nor does it replace the target repositories' own conventions: each skill reads that repository's `AGENTS.md` first and treats it as authoritative.
 
-> This is **not** an end-user clinical tool. For clinical modelling, archetype/template authoring, AQL, and CKM discovery, install the user-facing **[openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin)** instead. This plugin is for people *building* that tooling.
+**Requirements.** A Claude Code or Cursor host, and a checkout of the repository you are working on. Work in openehr-assistant-mcp also needs Docker: its `php`, `composer`, and PHPUnit commands run only inside the dev container (`make up-dev`), never on the host. Three skills pre-approve openEHR Assistant MCP tools; the plugin bundles no MCP server, so your host resolves them from one you already have configured, typically a local dev instance (see [MCP wiring](#mcp-wiring)). The plugin itself is pure Markdown + JSON, with no build step.
 
-## Table of Contents
+## Table of contents
 
 - [Features](#features)
 - [Installation](#installation)
 - [Components](#components)
 - [MCP wiring](#mcp-wiring)
-- [Documentation](#documentation)
 - [Contributing](#contributing)
+- [Documentation](#documentation)
 - [License](#license)
-
----
 
 ## Features
 
-- **Guide & prompt authoring** — scaffolds implementation guides and MCP prompts with the right header blocks, categories, and policy split.
-- **MCP tool authoring** — author/extend `#[McpTool]`, resources, and completion providers with matching PHPUnit tests, run via the Docker dev container.
-- **Example authoring** — add curated worked examples in the `openehr://examples/{aql|flat|structured|archetypes}` namespace.
-- **Release workflow** — version bump, Keep-a-Changelog curation, manifest sync, and `mcp` ↔ `plugin` compatibility alignment.
-- **Repo-aware** — a session hook and a scout agent detect which target repo you're in and surface the applicable conventions and dev commands.
-
----
+- **Guide and prompt authoring**: scaffolds implementation guides and MCP prompts with the right header blocks, categories, and policy split.
+- **MCP tool authoring**: authors or extends `#[McpTool]`, resources, and completion providers with matching PHPUnit tests, run in the Docker dev container.
+- **Example authoring**: adds curated worked examples in the `openehr://examples/{aql|flat|structured|archetypes}` namespace.
+- **Release workflow**: version bump, Keep a Changelog curation, manifest sync, and `mcp` ↔ `plugin` compatibility alignment.
+- **Repo-aware**: a session hook and a scout agent detect which target repository you are in and surface its conventions and dev commands.
 
 ## Installation
 
-**Claude Code** — from the Cadasto marketplace:
+**Claude Code**, from the Cadasto marketplace:
 
-```
+```text
 /plugin marketplace add Cadasto/plugin-marketplace
 /plugin install openehr-assistant-dev@cadasto
 ```
@@ -50,9 +45,9 @@ Or load a local working copy for a single session, while developing:
 claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 ```
 
-**Cursor** — Add the plugin via Cursor's plugin flow (Git URL or local path). The repo includes a Cursor manifest at [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json); skills, rules, agents, and hooks are shared with the Claude plugin.
+**Cursor**: add the plugin through Cursor's plugin flow, from a Git URL or a local path. The repository includes a Cursor manifest at [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json); skills, rules, agents, and hooks are shared with the Claude plugin.
 
----
+See [docs/install.md](docs/install.md) for marketplace, local-development, update, and Cursor install details.
 
 ## Components
 
@@ -61,7 +56,7 @@ claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 | Skill | Target repo | Description |
 |-------|-------------|-------------|
 | `guide-prompt-authoring` | mcp | Author implementation guides (`resources/guides/`) and MCP prompts (`resources/prompts/` + `src/Prompts/`) |
-| `mcp-tool-authoring` | mcp | Author/extend MCP tools, resources, and completion providers in `src/`, with PHPUnit tests, via the Docker dev container |
+| `mcp-tool-authoring` | mcp | Author or extend MCP tools, resources, and completion providers in `src/`, with PHPUnit tests, in the Docker dev container |
 | `example-authoring` | mcp | Author curated worked examples in the `openehr://examples/{kind}/{name}` namespace |
 | `release-workflow` | both | Version bump, CHANGELOG curation, manifest sync, and `mcp` ↔ `plugin` compatibility alignment |
 
@@ -69,13 +64,15 @@ claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 
 | Agent | Description |
 |-------|-------------|
-| `repo-conventions-scout` | Detects which target repo the workspace is (mcp / plugin / dev) and returns the applicable layout, conventions, and dev commands |
+| `repo-conventions-scout` | Detects which target repository the workspace is (mcp, plugin, or this dev plugin) and returns the applicable layout, conventions, and dev commands |
 
 ### Hooks
 
-- **SessionStart** — detects the target repo and prints the applicable dev commands plus the Docker-only reminder.
+- **SessionStart**: detects the target repository and prints the applicable skills and dev commands; in openehr-assistant-mcp it adds the Docker-only reminder. It prints nothing in any other repository.
 
----
+### Cursor rule
+
+- **`dev-context.mdc`**: Cursor-only guidance, scoped to the target repositories' key files, to read the target repository's `AGENTS.md` first and use this plugin's authoring skills.
 
 ## MCP wiring
 
@@ -91,23 +88,26 @@ To point at a local server, add an `.mcp.json` of your own:
 }
 ```
 
----
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for maintainer workflows and [AGENTS.md](AGENTS.md) for the full conventions used by AI assistants in this repository. Before opening a PR, run both checks:
+
+```bash
+./scripts/validate.sh        # manifests, dual-host parity, frontmatter
+claude plugin validate .     # manifest + component structure
+```
+
+`validate.sh` warns and skips if Python is not installed; CI runs the full check. See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ## Documentation
 
 | Doc | Purpose |
 |-----|---------|
-| [docs/install.md](docs/install.md) | Install/update on Claude Code and Cursor |
+| [docs/install.md](docs/install.md) | Install and update on Claude Code and Cursor |
 | [docs/testing.md](docs/testing.md) | Validation (`scripts/validate.py`) and local triggering tests |
 | [docs/versioning.md](docs/versioning.md) | SemVer policy and release steps |
-| [docs/skill-authoring.md](docs/skill-authoring.md) | Skill/agent authoring conventions (the lean description pattern) |
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for maintainer workflows and [AGENTS.md](AGENTS.md) for the full conventions used by AI assistants in this repo. Run `./scripts/validate.sh` before opening a PR (it warns and skips if Python isn't installed; CI runs the full check). See [CHANGELOG.md](CHANGELOG.md) for release notes.
-
----
+| [docs/skill-authoring.md](docs/skill-authoring.md) | Skill and agent authoring conventions (the lean description pattern) |
 
 ## License
 
-[MIT License](LICENSE) — Cadasto B.V.
+[MIT License](LICENSE)

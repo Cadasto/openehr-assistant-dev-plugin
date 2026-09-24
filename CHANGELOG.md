@@ -1,11 +1,20 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project are recorded in this file.
 
-The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- Keep a Changelog: [https://keepachangelog.com/en/1.1.0/](https://keepachangelog.com/en/1.1.0/)
-- Semantic Versioning: [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html)
+## [Unreleased]
+
+### Changed
+- Docs: `README.md` opens with an intro, a fit paragraph naming the user-facing `openehr-assistant-plugin`, and a requirements paragraph; `Contributing` moves before `Documentation` and shows both validation commands.
+- Docs: `README.md` lists the `dev-context.mdc` Cursor rule under `Components`.
+- Docs: each `docs/` page opens with a paragraph naming its reader and purpose.
+- Docs: em dashes removed from `README.md`, `docs/`, `CONTRIBUTING.md`, `SECURITY.md`, and the `.github/` templates.
+
+### Fixed
+- Docs: `docs/testing.md` says CI runs `scripts/validate.py` directly, and loads a working copy with `--plugin-dir` instead of installing it.
+- Docs: `README.md` says the `SessionStart` hook prints the Docker-only reminder only in `openehr-assistant-mcp` and stays silent in other repositories.
 
 ## [0.3.0] - 2026-08-25
 

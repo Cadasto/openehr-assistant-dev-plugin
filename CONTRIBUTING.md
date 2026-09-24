@@ -1,6 +1,6 @@
 # Contributing to openehr-assistant-dev-plugin
 
-Thank you for your interest in contributing! This plugin is **maintainer tooling** for the openEHR Assistant ecosystem. It helps developers author and release artefacts for the [openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp) server and the [openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin).
+Thank you for your interest in contributing. This plugin is **maintainer tooling** for the openEHR Assistant ecosystem. It helps developers author and release artefacts for the [openehr-assistant-mcp](https://github.com/cadasto/openehr-assistant-mcp) server and the [openehr-assistant-plugin](https://github.com/cadasto/openehr-assistant-plugin).
 
 ## Table of contents
 - [Project setup](#project-setup)
@@ -24,11 +24,11 @@ cd openehr-assistant-dev-plugin
 claude --plugin-dir .
 ```
 
-No build step is required — the plugin is pure markdown and JSON.
+No build step is required: the plugin is pure Markdown and JSON.
 
 ## Plugin structure
 
-```
+```text
 .claude-plugin/plugin.json    # Claude Code plugin manifest
 .cursor-plugin/plugin.json     # Cursor plugin manifest (same version, component paths)
 skills/                        # Authoring + release workflows
@@ -47,17 +47,17 @@ rules/                         # Cursor-only rules (.mdc)
 Key conventions:
 - Skills go in `skills/<name>/SKILL.md` with YAML frontmatter.
 - Agents go in `agents/<name>.md` with YAML frontmatter.
-- This plugin uses the **skills-first** layout — there is no legacy `commands/` directory.
+- This plugin uses the **skills-first** layout: there is no legacy `commands/` directory.
 - `allowed-tools` in skill frontmatter pre-approves `mcp__openehr-assistant__<tool>` ids to avoid permission prompts.
 
 ## Repository archives (.gitattributes)
 
-[`.gitattributes`](.gitattributes) marks some paths with **`export-ignore`** — excluded from `git archive` (and tooling that respects Git export attributes), but **not** from a normal `git clone` or checkout of `main`. Currently omitted from archives: `AGENTS.md`, `CONTRIBUTING.md`, `.github/**`. Prefer **`git clone`** when developing so you keep maintainer docs and GitHub metadata.
+[`.gitattributes`](.gitattributes) marks some paths with **`export-ignore`**, which excludes them from `git archive` (and tooling that respects Git export attributes), but **not** from a normal `git clone` or checkout of `main`. Currently omitted from archives: `AGENTS.md`, `CONTRIBUTING.md`, `.github/**`. Prefer **`git clone`** when developing so you keep maintainer docs and GitHub metadata.
 
 ## Adding or modifying components
 
 ### Skills
-- Each skill targets the `mcp` repo, the `plugin` repo, or both — state this in the skill body.
+- Each skill targets the `mcp` repo, the `plugin` repo, or both; state this in the skill body.
 - Skills must defer to the **target repo's own `AGENTS.md`**, which is authoritative; this plugin's skills summarise and operationalise those conventions.
 - Use progressive disclosure: mandatory preparation steps first, then detailed guidance.
 - List all required MCP tools in `allowed-tools`.
@@ -67,7 +67,7 @@ Key conventions:
 - Keep agents context-isolated and return structured, actionable summaries.
 
 ### Hooks
-- Keep hook scripts fast — they run on every session start.
+- Keep hook scripts fast: they run on every session start.
 - Use `${CLAUDE_PLUGIN_ROOT}` for paths in `hooks.json`.
 
 ### Documentation
@@ -83,11 +83,11 @@ Load from a local path:
 claude --plugin-dir /path/to/openehr-assistant-dev-plugin
 ```
 
-Verify components work by opening one of the target repos and confirming the SessionStart hook detects it, then invoke a skill (e.g. ask to "create a guide" inside the MCP repo).
+Verify components work by opening one of the target repos and confirming the SessionStart hook detects it, then invoke a skill (for example, ask to "create a guide" inside the MCP repo).
 
 ## Commit messages and pull requests
 - Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) (`feat:`, `fix:`, `docs:`, `refactor:`, `chore:`). Scopes: `skills`, `agents`, `hooks`, `rules`, `docs`, `meta`.
-- One logical change per PR. Link related issues with GitHub keywords (e.g., `Fixes #123`).
+- One logical change per PR. Link related issues with GitHub keywords (for example, `Fixes #123`).
 
 PR checklist:
 - [ ] Component works when tested locally with `claude --plugin-dir .`
@@ -102,4 +102,4 @@ PR checklist:
 ## Security
 Do not open public issues for security vulnerabilities. See [SECURITY.md](SECURITY.md) for the threat model and private reporting process. This project follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-Thank you for contributing!
+Thank you for contributing.
